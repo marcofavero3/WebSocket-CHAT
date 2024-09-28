@@ -1,0 +1,285 @@
+/* Importa fontes e ícones */
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+/* Estilos globais para html e body */
+html, body {
+  height: 100%;  /* Define a altura de 100% da tela */
+  margin: 0;  /* Remove a margem padrão */
+  font-family: 'Roboto', sans-serif;  /* Define a fonte principal */
+  font-weight: 100;  /* Define o peso da fonte */
+  background-color: #F1F2F6;  /* Cor de fundo da página */
+  display: flex;  /* Usa flexbox para centralizar o conteúdo */
+  justify-content: center;  /* Centraliza horizontalmente */
+  align-items: center;  /* Centraliza verticalmente */
+}
+
+/* Container principal do chat */
+#container {
+  width: 90%;  /* Define a largura como 90% da tela */
+  max-width: 1200px;  /* Define a largura máxima */
+  height: 85vh;  /* Altura de 85% da viewport */
+  display: flex;  /* Flexbox para organizar os elementos */
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);  /* Sombra ao redor do container */
+  min-width: 600px;  /* Largura mínima do container */
+  margin: 20px auto;  /* Margem em cima e embaixo */
+  background-color: #fff;  /* Fundo branco */
+  border-radius: 10px;  /* Arredondamento dos cantos */
+  overflow: hidden;  /* Esconde conteúdo que ultrapassa os limites */
+}
+
+/* Estilos para a barra lateral (aside) */
+aside {
+  width: 300px;  /* Largura fixa */
+  background-color: #2F373F;  /* Cor de fundo da barra lateral */
+  display: flex;  /* Flexbox para organizar conteúdo verticalmente */
+  flex-direction: column;
+  overflow-y: auto;  /* Habilita rolagem vertical se necessário */
+}
+
+/* Estilos da área principal (conteúdo do chat) */
+#main {
+  flex-grow: 1;  /* Faz com que o main ocupe o espaço disponível */
+  display: flex;
+  flex-direction: column;
+  background-color: #E7EDED;  /* Cor de fundo */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cabeçalho da barra lateral */
+aside header {
+  background-color: #343E48;
+  padding: 20px;
+  text-align: center;  /* Centraliza o texto */
+  color: #fff;  /* Cor do texto branco */
+  font-weight: bold;
+}
+
+/* Lista de usuários conectados na barra lateral */
+aside ul {
+  padding: 0 10px;
+  list-style-type: none;  /* Remove marcadores de lista */
+  flex-grow: 1;  /* Faz a lista ocupar o espaço disponível */
+  overflow-y: auto;  /* Habilita rolagem vertical */
+}
+
+/* Estilos de cada item (usuário) na lista */
+aside ul li {
+  display: flex;
+  justify-content: space-between;  /* Espaça o avatar e o nome do usuário */
+  align-items: center;
+  color: #c0c0c0;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #2F373F;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo de hover para cada usuário na lista */
+aside ul li:hover {
+  background-color: #1E252A;  /* Muda a cor de fundo ao passar o mouse */
+}
+
+/* Estilos para o avatar do usuário */
+.avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;  /* Arredondamento para tornar a imagem circular */
+}
+
+/* Estilo do nome do usuário */
+.main_li {
+  flex-grow: 1;
+  margin-left: 10px;
+  word-wrap: break-word;  /* Quebra o texto em várias linhas se necessário */
+  white-space: normal;
+}
+
+.username {
+  font-size: 1rem;
+  color: white;
+}
+
+/* Estilos para a área de mensagens (chat thread) */
+.chat-thread {
+  list-style: none;  /* Remove marcadores de lista */
+  padding: 20px;
+  overflow-y: auto;  /* Habilita rolagem vertical */
+  background-color: #F3F4F6;
+  height: calc(100vh - 160px);  /* Define a altura em relação à tela */
+}
+
+/* Estilos para cada mensagem */
+.chat-thread li {
+  display: block;
+  clear: both;
+  position: relative;
+  padding: 12px 20px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  font-size: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;  /* Preserva espaços e quebras de linha */
+  hyphens: auto;  /* Adiciona hifens para dividir palavras longas */
+  max-width: 75vw;
+}
+
+/* Estilos para as mensagens enviadas (direita) */
+.chat-thread li.right {
+  background-color: #DCF8C6;
+  float: right;
+  text-align: right;
+}
+
+/* Estilos para as mensagens recebidas (esquerda) */
+.chat-thread li:not(.right) {
+  background-color: #fff;
+  float: left;
+  text-align: left;
+}
+
+/* Estilos para as setas que apontam para as mensagens */
+.chat-thread li::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+/* Setas para as mensagens enviadas (direita) */
+.chat-thread li.right::after {
+  right: -10px;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent #DCF8C6;
+}
+
+/* Setas para as mensagens recebidas (esquerda) */
+.chat-thread li:not(.right)::after {
+  left: -10px;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #fff transparent transparent;
+}
+
+/* Estilo para o timestamp (horário da mensagem) */
+.timestamp {
+  display: block;
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 5px;
+  text-align: right;
+}
+
+/* Estilos para a janela de entrada de mensagem */
+.chat-window {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Estilos para o campo de texto onde a mensagem é digitada */
+.chat-window-message {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Estilo ao focar no campo de texto */
+.chat-window-message:focus {
+  border-color: #4CAF50;  /* Cor verde ao focar */
+}
+
+/* Estilos para o ícone de envio */
+.chat-window i {
+  font-size: 1.5rem;
+  color: #4CAF50;
+  cursor: pointer;
+  margin-left: 10px;
+  align-self: center;
+}
+
+/* Estilos para a responsividade */
+
+/* Para smartphones */
+@media only screen and (max-width: 600px) {
+  #container {
+    flex-direction: column;  /* Muda para coluna em telas pequenas */
+    min-width: 100%;
+    height: 100vh;  /* Ocupa toda a altura da tela */
+  }
+
+  aside {
+    width: 100%;
+    max-height: 200px;
+  }
+
+  .chat-thread {
+    height: calc(100vh - 300px);  /* Ajuste de altura */
+  }
+
+  .chat-thread li {
+    max-width: 90%;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .chat-window-message {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
+
+/* Para tablets */
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+  #container {
+    width: 100%;
+    flex-direction: row;  /* Layout em linha */
+    height: 90vh;
+  }
+
+  aside {
+    width: 250px;
+  }
+
+  .chat-thread li {
+    max-width: 85%;
+  }
+
+  .chat-window-message {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+/* Para desktops */
+@media only screen and (min-width: 901px) {
+  #container {
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh;
+  }
+
+  aside {
+    width: 300px;
+  }
+
+  .chat-thread li {
+    max-width: 75%;
+  }
+
+  .chat-window-message {
+    font-size: 1rem;
+  }
+}

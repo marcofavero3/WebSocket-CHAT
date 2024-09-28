@@ -1,0 +1,52 @@
+<section id="container">
+  <aside>
+    <header>
+      <!-- Remover o avatar -->
+      <div>Chat</div> <!-- Manter apenas o título "Chat" -->
+    </header>
+    <ul>
+      <li *ngFor="let user of connectedUsers; let i = index">
+        <div class="avatar">
+          <img alt="avatar" [src]="getAvatarUrl(i)" />
+        </div>
+        <div class="main_li">
+          <div class="username">{{ user }}</div>
+        </div>
+      </li>
+    </ul>
+  </aside>
+
+  <section id="main">
+    <section id="messages">
+      <!-- Adicionar #chatThread para controle do scroll automático -->
+      <ul class="chat-thread" #chatThread>
+        <li *ngFor="let msg of messages" [ngClass]="{'right': msg.sender === nickname}">
+          <strong>{{ msg.sender }}</strong>: {{ msg.content }}
+          <div class="timestamp">{{ msg.timestamp | date:'HH:mm' }}</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Alerta de erro -->
+    <div *ngIf="errorMessage" class="mb-4 p-3 bg-red-500 text-white text-sm rounded-lg shadow-lg flex justify-between items-center">
+      <span>{{ errorMessage }}</span>
+      <button (click)="closeError()" class="text-white hover:text-gray-300">&times;</button>
+    </div>
+
+    <footer>
+      <form class="chat-window" (submit)="sendMessage($event)">
+        <input 
+          class="chat-window-message" 
+          [(ngModel)]="message" 
+          name="chat-window-message" 
+          placeholder="Digite sua mensagem..." 
+          type="text" 
+          autocomplete="off" 
+          autofocus 
+          maxlength="100" 
+          (keydown.enter)="sendMessage($event)" />
+        <i class="fa-solid fa-paper-plane" (click)="sendMessage($event)"></i>
+      </form>
+    </footer>
+  </section>
+</section>

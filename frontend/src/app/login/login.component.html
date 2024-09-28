@@ -1,0 +1,21 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-96 dark:bg-gray-800">
+    <h2 class="text-2xl font-bold text-center mb-6 text-gray-700 dark:text-white">Entre no Chat</h2>
+
+    <!-- Alerta de erro -->
+    <div *ngIf="errorMessage" class="mb-4 p-3 bg-red-500 text-white text-sm rounded-lg shadow-lg flex justify-between items-center">
+      <span><strong>Erro:</strong> {{ errorMessage }}</span>
+      <button (click)="closeError()" class="text-white hover:text-gray-300">&times;</button>
+    </div>
+
+    <!-- Input com maxlength -->
+    <input [(ngModel)]="nickname" placeholder="Digite seu apelido"
+           class="w-full p-3 mb-4 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+           (keydown.enter)="login()" maxlength="18" />
+
+    <button (click)="login()" 
+            class="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-md shadow-md dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
+      Entrar
+    </button>
+  </div>
+</div>
